@@ -1,0 +1,138 @@
+<p>
+    <mat-toolbar color="primary">
+      <button mat-icon-button class="example-icon" (click)="home()">
+        <mat-icon>home</mat-icon>
+      </button>
+      <span
+        style="font-size: xx-large; font: weight 700px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">KPN</span>
+      <span class="example-spacer"></span>
+  
+      <button mat-button  (click)="dodavanje()">
+        <mat-icon>theaters</mat-icon>
+        <span style="font-size: large;">Dodaj nekretninu</span>
+      </button>
+  
+  
+      <button mat-button  (click)="ponude()">
+        <mat-icon>euro_symbol</mat-icon>
+        <span style="font-size: large;">Ponude</span>
+      </button>
+
+      <button mat-button (click)="odiNaMoje()">
+        <mat-icon>subject</mat-icon>
+        <span style="font-size: large;">Moje nekretnine</span>
+      </button>
+  
+      <button mat-button (click)="profile()">
+        <mat-icon>account_circle_icon</mat-icon>
+        <span style="font-size: large;">Profile</span>
+      </button>
+  
+      <button mat-button class="spacer" (click)="menjanjeSifre()">
+        <mat-icon>swap_horiz</mat-icon>
+        <span style="font-size: large;">Change password</span>
+      </button>
+  
+      <button mat-button class="spacer" (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span style="font-size: large;">LogOut</span>
+      </button>
+    </mat-toolbar>
+  </p>
+  
+  <br />
+  <br />
+ 
+  
+  
+  <table mat-table [dataSource]="nekretnine" class="mat-elevation-z8">
+  <ng-container matColumnDef="slika">
+      <th mat-header-cell *matHeaderCellDef>
+          Slika
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <img width="150px" height="150px" src="../../assets/{{element.galerija[0].path}}">
+      </td>
+  </ng-container>
+
+    <ng-container matColumnDef="naziv">
+      <th mat-header-cell *matHeaderCellDef>Naziv</th>
+      <td mat-cell *matCellDef="let element">{{element.naziv}}
+        <button mat-button color="primary"
+          (click)="promeniNaziv(element.id)">Promeni</button>
+        <input matInput [(ngModel)]="naziv">
+      </td>
+    </ng-container>
+      <ng-container matColumnDef="adresa">
+        <th mat-header-cell *matHeaderCellDef>Adresa</th>
+        <td mat-cell *matCellDef="let element">{{element.adresa}}<button mat-button color="primary"
+            (click)="promeniAdresu(element.id)">Promeni</button>
+          <input matInput [(ngModel)]="adresa" name="element.id">
+        </td>
+      </ng-container>
+        <ng-container matColumnDef="tip">
+          <th mat-header-cell *matHeaderCellDef>Tip</th>
+          <td mat-cell *matCellDef="let element">{{element.tip}}<button mat-button color="primary"
+              (click)="promeniTip(element.id)">Promeni</button>
+            <input matInput [(ngModel)]="tip">
+          </td>
+        </ng-container>
+          <ng-container matColumnDef="brojspratova">
+            <th mat-header-cell *matHeaderCellDef>Broj spratova</th>
+            <td mat-cell *matCellDef="let element">{{element.brojspratova}}<button mat-button color="primary"
+                (click)="promeniBrojspratova(element.id)">Promeni</button>
+              <input matInput [(ngModel)]="brojspratova">
+            </td>
+          </ng-container>
+            <ng-container matColumnDef="sprat">
+              <th mat-header-cell *matHeaderCellDef>Sprat</th>
+              <td mat-cell *matCellDef="let element">{{element.sprat}}<button mat-button color="primary"
+                  (click)="promeniSprat(element.id)">Promeni</button>
+                <input matInput [(ngModel)]="sprat">
+              </td>
+            </ng-container>
+              <ng-container matColumnDef="kvadratura">
+                <th mat-header-cell *matHeaderCellDef>Kvadratura</th>
+                <td mat-cell *matCellDef="let element">{{element.kvadratura}}<button mat-button color="primary"
+                    (click)="promeniKvadraturu(element.id)">Promeni</button>
+                  <input matInput [(ngModel)]="kvadratura">
+                </td>
+              </ng-container>
+                <ng-container matColumnDef="sobe">
+                  <th mat-header-cell *matHeaderCellDef>Sobe</th>
+                  <td mat-cell *matCellDef="let element">{{element.sobe}}<button mat-button color="primary"
+                      (click)="promeniSobe(element.id)">Promeni</button>
+                    <input matInput [(ngModel)]="sobe">
+                  </td>
+                </ng-container>
+                  <ng-container matColumnDef="izdaje">
+                    <th mat-header-cell *matHeaderCellDef>Izdaje/Prodaje</th>
+                    <td mat-cell *matCellDef="let element">{{element.izdaje}}<button mat-button color="primary"
+                        (click)="promeniIzdaje(element.id)">Promeni</button>
+                      <input matInput [(ngModel)]="izdaje">
+                    </td>
+                  </ng-container>
+                    <ng-container matColumnDef="cena">
+                      <th mat-header-cell *matHeaderCellDef>Cena</th>
+                      <td mat-cell *matCellDef="let element">{{element.cena}}$<button mat-button color="primary"
+                          (click)="promeniCenu(element.id)">Promeni</button>
+                        <input matInput [(ngModel)]="cena">
+                      </td>
+                    </ng-container>
+                      <ng-container matColumnDef="gradopstina">
+                        <th mat-header-cell *matHeaderCellDef>Grad i opstina</th>
+                        <td mat-cell *matCellDef="let element">{{element.gradopstina}}<button mat-button color="primary"
+                            (click)="promeniGradopstinu(element.id)">Promeni</button>
+                          <input matInput [(ngModel)]="gradopstina">
+                        </td>
+                      </ng-container>
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+                    
+  </table>
+  
+  <br/>
+
+  <div style="color:white">{{nekret.naziv}}</div>
+

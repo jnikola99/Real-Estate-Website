@@ -1,0 +1,99 @@
+<p>
+    <mat-toolbar color="primary">
+      <button mat-icon-button class="example-icon" (click)="home()">
+        <mat-icon>home</mat-icon>
+      </button>
+      <span style="font-size: xx-large; font: weight 700px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">KPN</span>
+      <span class="example-spacer"></span>
+      <button mat-button class="spacer" (click)="loginClick()">
+        <mat-icon>input</mat-icon>
+        <span style="font-size: large;">LogIn</span>
+      </button>
+      
+      <button mat-button class="spacer" (click)="registerClick()">
+        <mat-icon>launch</mat-icon>
+        <span style="font-size: large;">Register</span>
+      </button>
+    </mat-toolbar>
+  </p>  
+
+<br/>
+<br/>
+
+
+<h1>Register</h1>
+<form [formGroup]="form" (submit)="onSubmit()">
+    <div>
+        <span>Username:</span> <input formControlName="username" type="text" required>
+        <div *ngIf="username.invalid" class="red2">
+            Username required!
+        </div>
+    </div>
+    
+    <div>
+        <span>Password:</span> <input formControlName="password" type="password"  required>
+        <div *ngIf="password.invalid" class="red2">
+            Password required! At least: 1 lowercase,1 uppercase,1 special character, 8-24 length, no more than 3 symbols in row
+        </div>
+    </div>
+    <br>
+    <div>
+        <span>Confirm password: </span><input formControlName="confirm" type="password" required>
+        <div *ngIf="confirm.invalid" class="red2">
+            Password not matching!
+        </div>
+    </div>
+    <div>
+        <span>Firstname:</span> <input formControlName="firstname" type="text" required>
+        <div *ngIf="firstname.invalid" class="red2">
+            Firstname required!
+        </div>
+    </div>
+    <div>
+        <span>Lastname:</span> <input formControlName="lastname" type="text" required>
+        <div *ngIf="lastname.invalid" class="red2">
+            Lastname required!
+        </div>
+    </div>
+    <div>
+        <span>Country:</span> <select formControlName="country" >
+            <option *ngFor='let k of country_list'>{{k}}</option>
+        </select>
+        <div *ngIf="country.invalid" class="red2">
+            Country required!
+        </div>
+    </div>
+    <div>
+        <span>City:</span> <input formControlName="city" type="text">
+        <div *ngIf="city.invalid" class="red2">
+            City required!
+        </div>
+    </div>
+    <div>
+        <span>Mail:</span> <input formControlName="mail" type="text">
+        <div *ngIf="mail.invalid" class="red2">
+            Mail required!
+        </div>
+    </div>
+
+    <br>
+
+    <div>
+        <span>Choose profile picture(optional):</span> <input (change)="onFileSelect($event)" type="file" >
+    </div>
+    <div *ngIf="imageData">
+        <img [src]="imageData" height="100px" width="100px">
+    </div>
+    <br>
+    <div>
+        <button type="submit" class="button-register" [disabled]="!form.valid">Register</button>
+    </div>
+    
+
+    <div *ngIf='poruka' class='red'>
+        {{poruka}}
+    </div>
+</form> 
+
+<br/>
+<br/>

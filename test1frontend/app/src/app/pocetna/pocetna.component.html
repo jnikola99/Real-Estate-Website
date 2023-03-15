@@ -1,0 +1,77 @@
+<p>
+    <mat-toolbar color="primary">
+      <button mat-icon-button class="example-icon" (click)="home()">
+        <mat-icon>home</mat-icon>
+      </button>
+      <span style="font-size: xx-large; font: weight 700px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">KPN</span>
+      <span class="example-spacer"></span>
+      <button mat-button class="spacer" (click)="loginClick()">
+        <mat-icon>input</mat-icon>
+        <span style="font-size: large;">LogIn</span>
+      </button>
+      
+      <button mat-button class="spacer" (click)="registerClick()">
+        <mat-icon>launch</mat-icon>
+        <span style="font-size: large;">Register</span>
+      </button>
+    </mat-toolbar>
+  </p>  
+
+<br/>
+<br/>
+
+<h4>Promovisane nekretnine</h4>
+<div style="width: 80%; margin:0 auto;">
+  <ng-image-slider [images]="imageObject" #nav
+  [infinite]="true"
+  [autoSlide]="3"
+  slideImage="1"
+  [imageSize]="{width: '25%', height: 200}"
+ 
+  ></ng-image-slider>
+</div>
+
+<br/>
+<br/>
+
+<h4>Pretraga nekretnina</h4>
+<section class="forma">
+<mat-checkbox [(ngModel)]="poceni" class="pretraga"><mat-label>Pretraga po ceni </mat-label></mat-checkbox><br/>
+<mat-form-field *ngIf="poceni" appearence="fill" class="pretraga"><input [(ngModel)]="donjiopseg" matInput placeholder="Donja granica"></mat-form-field><br/>
+<mat-form-field *ngIf="poceni" appearence="fill" class="pretraga"><input [(ngModel)]="gornjiopseg" matInput placeholder="Gornja granica"></mat-form-field><br/>
+<mat-checkbox [(ngModel)]="pogradu" class="pretraga">Pretraga po gradu </mat-checkbox><br/>
+<mat-form-field *ngIf="pogradu" class="pretraga"><input [(ngModel)]="grad" matInput placeholder="Grad"></mat-form-field><br>
+<div class="pretraga"><button mat-raised-button color="primary"  (click)="getNekretnine()" >Pretraga</button></div>
+</section>
+
+<br/>
+<div *ngIf="nekretnine" class="btn-center">
+    <div *ngFor="let n of nekretnine">
+    <mat-card class="cards">
+        <img mat-card-lg-image class="mat-elevation-z5"  src="assets/{{n.galerija[0].path}}">
+        <br/>
+        <br/>
+        <mat-card-title class="naslov-card">
+            {{n.naziv}}
+        </mat-card-title>
+        <mat-card-subtitle>
+            {{n.gradopstina}}
+        </mat-card-subtitle>
+        <mat-card-content>
+            Cena: {{n.cena}}$
+        </mat-card-content>
+        <mat-card-content>
+            {{n.izdaje}}
+        </mat-card-content>
+        <mat-car-content *ngIf="n.tip=='Stan'">
+          {{n.sobe}}
+        </mat-car-content>
+        <mat-card-content>
+          {{n.tip}}
+        </mat-card-content>
+        <mat-card-content>
+          {{n.kvadratura}}
+        </mat-card-content>
+    </mat-card>
+</div>
+</div>

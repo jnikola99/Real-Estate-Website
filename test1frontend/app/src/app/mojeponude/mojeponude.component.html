@@ -1,0 +1,88 @@
+<p>
+    <mat-toolbar color="primary">
+      <button mat-icon-button class="example-icon" (click)="home()">
+        <mat-icon>home</mat-icon>
+      </button>
+      <span style="font-size: xx-large; font: weight 700px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">KPN</span>
+      <span class="example-spacer"></span>
+
+      <button mat-button  (click)="dodavanje()">
+        <mat-icon>theaters</mat-icon>
+        <span style="font-size: large;">Dodaj nekretninu</span>
+      </button>
+  
+
+      <button mat-button  (click)="ponude()">
+        <mat-icon>euro_symbol</mat-icon>
+        <span style="font-size: large;">Ponude</span>
+      </button>
+
+
+      <button mat-button  (click)="odiNaMoje()">
+        <mat-icon>subject</mat-icon>
+        <span style="font-size: large;">Moje nekretnine</span>
+      </button>
+
+      <button mat-button  (click)="profile()">
+        <mat-icon>account_circle_icon</mat-icon>
+        <span style="font-size: large;">Profile</span>
+      </button>
+
+      <button mat-button class="spacer" (click)="menjanjeSifre()">
+        <mat-icon>swap_horiz</mat-icon>
+        <span style="font-size: large;">Change password</span>
+      </button>
+      
+      <button mat-button class="spacer" (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span style="font-size: large;">LogOut</span>
+      </button>
+    </mat-toolbar>
+  </p>  
+
+  <br/>
+  <br/>
+  <h4>Moje ponude</h4>
+
+  <table mat-table [dataSource]="mojePonude" class="mat-elevation-z8">
+    <ng-container matColumnDef="naziv">
+        <th mat-header-cell *matHeaderCellDef>Nekretnina</th>
+        <td mat-cell *matCellDef="let element">{{element.imeNekretnine}}
+          
+        </td>
+    </ng-container>
+        <ng-container matColumnDef="poslao">
+            <th mat-header-cell *matHeaderCellDef>Poslao</th>
+            <td mat-cell *matCellDef="let element">{{element.poslao}}
+              
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="ponuda">
+            <th mat-header-cell *matHeaderCellDef>Ponuda</th>
+            <td mat-cell *matCellDef="let element">{{element.ponuda}}$
+              
+            </td>
+        </ng-container>
+            <ng-container matColumnDef="datumOd">
+                <th mat-header-cell *matHeaderCellDef>Datum Od</th>
+                <td mat-cell *matCellDef="let element">{{element.datumOd}}
+                  
+                </td>
+            </ng-container>
+                <ng-container matColumnDef="datumDo">
+                    <th mat-header-cell *matHeaderCellDef>Datum Do</th>
+                    <td mat-cell *matCellDef="let element">{{element.datumDo}}
+                      
+                    </td>
+                </ng-container>
+                    <ng-container matColumnDef="dugme">
+                        <th mat-header-cell *matHeaderCellDef>Prihvati</th>
+                        <td mat-cell *matCellDef="let element"><button mat-raised-button color="primary" (click)="prihvatiPonudu(element.id,element.idNekretnine,element.datumOd,element.datumDo)">Prihvati</button>
+                          
+                        </td>
+
+                    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>

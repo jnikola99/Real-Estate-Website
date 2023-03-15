@@ -1,0 +1,67 @@
+<p>
+    <mat-toolbar color="primary">
+      <button mat-icon-button class="example-icon" (click)="home()">
+        <mat-icon>home</mat-icon>
+      </button>
+      <span style="font-size: xx-large; font: weight 700px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">KPN</span>
+      <span class="example-spacer"></span>
+
+      <button mat-button  (click)="dodavanje()">
+        <mat-icon>theaters</mat-icon>
+        <span style="font-size: large;">Dodaj nekretninu</span>
+      </button>
+
+
+      <button mat-button  (click)="ponude()">
+        <mat-icon>euro_symbol</mat-icon>
+        <span style="font-size: large;">Ponude</span>
+      </button>
+
+
+      <button mat-button  (click)="odiNaMoje()">
+        <mat-icon>subject</mat-icon>
+        <span style="font-size: large;">Moje nekretnine</span>
+      </button>
+
+      <button mat-button  (click)="profile()">
+        <mat-icon>account_circle_icon</mat-icon>
+        <span style="font-size: large;">Profile</span>
+      </button>
+
+      <button mat-button class="spacer" (click)="menjanjeSifre()">
+        <mat-icon>swap_horiz</mat-icon>
+        <span style="font-size: large;">Change password</span>
+      </button>
+      
+      <button mat-button class="spacer" (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span style="font-size: large;">LogOut</span>
+      </button>
+    </mat-toolbar>
+  </p>  
+
+<h1>Reset password</h1>
+
+<form [formGroup]='form' (submit)="submit()">
+    <div>
+        <span>Old password: </span> <input formControlName="oldpassword" type="password" required>
+        <div *ngIf="oldpassword.invalid" class='red2'>
+            Old password required!
+        </div>
+    </div>
+    <div>
+        <span>New password: </span> <input formControlName="newpassword" type="password" required>
+        <div *ngIf="newpassword.invalid" class='red2'>
+            New password required!
+        </div>
+    </div>
+    <div>
+        <span>Confirm password: </span> <input formControlName="confirm" type="password" required>
+        <div *ngIf="confirm.invalid" class='red2'>
+            Passwords don't match!
+        </div>
+    </div>
+    <div>
+        <button type="submit" class="button1" [disabled]="!form.valid">Submit</button>
+    </div>
+</form>

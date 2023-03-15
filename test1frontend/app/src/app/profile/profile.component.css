@@ -1,0 +1,23 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  
+  .spacer{
+    padding: 15px;
+  }
+
+  table {
+    width: 80%;
+    height: 120px;
+    margin:0 auto;
+  }
+
+  h4{
+    color:#3700b3;
+      font-family: 'Helvetica Neue', sans-serif; 
+      font-size: 50px; 
+      font-weight: bold; 
+      letter-spacing: -1px; 
+      line-height: 1; 
+      text-align:center;
+  }

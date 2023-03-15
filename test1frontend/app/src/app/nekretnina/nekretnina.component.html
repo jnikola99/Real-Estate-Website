@@ -1,0 +1,136 @@
+<p>
+  <mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon" (click)="home()">
+      <mat-icon>home</mat-icon>
+    </button>
+    <span
+      style="font-size: xx-large; font: weight 700px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">KPN</span>
+    <span class="example-spacer"></span>
+
+    <button mat-button  (click)="dodavanje()">
+      <mat-icon>theaters</mat-icon>
+      <span style="font-size: large;">Dodaj nekretninu</span>
+    </button>
+
+
+    <button mat-button  (click)="ponude()">
+      <mat-icon>euro_symbol</mat-icon>
+      <span style="font-size: large;">Ponude</span>
+    </button>
+
+    <button mat-button (click)="odiNaMoje()">
+      <mat-icon>subject</mat-icon>
+      <span style="font-size: large;">Moje nekretnine</span>
+    </button>
+
+    <button mat-button (click)="profile()">
+      <mat-icon>account_circle_icon</mat-icon>
+      <span style="font-size: large;">Profile</span>
+    </button>
+
+    <button mat-button class="spacer" (click)="menjanjeSifre()">
+      <mat-icon>swap_horiz</mat-icon>
+      <span style="font-size: large;">Change password</span>
+    </button>
+
+    <button mat-button class="spacer" (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+      <span style="font-size: large;">LogOut</span>
+    </button>
+  </mat-toolbar>
+</p>
+
+<br />
+<br />
+<h4>Nekretnina: {{nekretnina.naziv}}</h4>
+<div class="btn-center">
+  <mat-card class="cards">
+    <img width="400px" height="350px" mat-card-image class="mat-elevation-z5"
+      src="assets/{{nekretnina.galerija[0].path}}">
+    <img width="200px" height="100px" mat-card-lg-image class="mat-elevation-z5"
+      src="assets/{{nekretnina.galerija[1].path}}">
+    <img width="200px" height="100px" mat-card-lg-image class="mat-elevation-z5"
+      src="assets/{{nekretnina.galerija[2].path}}">
+    <br />
+    <br />
+    <mat-card-title class="naslov-card" style="font-size: xx-large;">
+      {{nekretnina.naziv}}
+    </mat-card-title>
+    <br />
+    <mat-card-content class="tekst">
+      <span style="color:#3700b3">Grad i opstina:</span> {{nekretnina.gradopstina}}
+    </mat-card-content>
+    <mat-card-content class="tekst">
+      <span style="color:#3700b3">Adresa:</span> {{nekretnina.adresa}}
+    </mat-card-content>
+    <mat-card-content class="tekst">
+      <span style="color:#3700b3">Cena:</span> {{nekretnina.cena}}$
+    </mat-card-content>
+    <mat-card-content class="tekst">
+      <span style="color:#3700b3">Prodaje/Izdaje se:</span> {{nekretnina.izdaje}}
+    </mat-card-content>
+    <mat-car-content *ngIf="nekretnina.tip=='Stan'" class="tekst">
+      {{nekretnina.sobe}}
+    </mat-car-content>
+    <mat-card-content class="tekst">
+      <span style="color:#3700b3">Stan/Kuca:</span> {{nekretnina.tip}}
+    </mat-card-content>
+    <mat-card-content class="tekst">
+      <span style="color:#3700b3">Kvadratura:</span> {{nekretnina.kvadratura}}
+    </mat-card-content>
+    <mat-card-content *ngIf="nekretnina.namestena==true" class="tekst">
+      Namestena
+    </mat-card-content>
+    <mat-card-content class="tekst">
+      <span style="color:#3700b3">Vlasnik:</span> {{nekretnina.vlasnik}}
+    </mat-card-content>
+
+    <mat-card-content>
+      <button *ngIf="nekretnina.izdaje=='Prodaje se'" mat-raised-button color="primary" (click)="dajPonudu()"><i>Daj
+          ponudu</i></button>
+    </mat-card-content>
+    <mat-card-content>
+      <div>
+        <mat-form-field *ngIf="ponudaBool"><input matInput [(ngModel)]="ponuda" placeholder="Ponuda"></mat-form-field>
+        <button *ngIf="ponudaBool" mat-raised-button color="primary" (click)="posaljiPonudu()"><i>Posalji</i></button>
+      </div>
+    </mat-card-content>
+    <mat-card-content>
+      <div *ngIf="ponudaBool">
+        <mat-radio-group [(ngModel)]="kredit" aria-label="Select an option">
+          <mat-radio-button value="kredit1">Kredit</mat-radio-button>
+          <mat-radio-button value="gotovina1">Gotovina</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </mat-card-content>
+    <mat-card-content>
+      <div *ngIf="ponudaBool && kredit=='kredit1' ">Ucesce: {{ponuda*0.2}}$</div>
+    </mat-card-content>
+
+    <mat-card-content *ngIf="nekretnina.izdaje=='Izdaje se'">
+      <mat-form-field appearance="fill">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate [(ngModel)]="pocetak" placeholder="Start date">
+          <input matEndDate [(ngModel)]="kraj" placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-content *ngIf="nekretnina.izdaje=='Izdaje se'">
+      <mat-form-field appearence="fill">
+        <input matInput [(ngModel)]="iznCena" placeholder="Ponuda">
+        
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="izaberiDatum()">Izaberi</button>
+    </mat-card-content>
+
+    <!--<mat-card-content *ngIf="nekretnina.izdaje=='Izdaje se'">
+      <button mat-raised-button color="primary" (click)="izaberiDatum()">Izaberi</button>
+    </mat-card-content>-->
+     
+   
+  </mat-card>
+</div>

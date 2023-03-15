@@ -1,0 +1,42 @@
+<p>
+    <mat-toolbar color="primary">
+      <button mat-icon-button class="example-icon" (click)="home()">
+        <mat-icon>home</mat-icon>
+      </button>
+      <span style="font-size: xx-large; font: weight 700px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">KPN</span>
+      <span class="example-spacer"></span>
+      <button mat-button class="spacer" (click)="loginClick()">
+        <mat-icon>input</mat-icon>
+        <span style="font-size: large;">LogIn</span>
+      </button>
+      
+      <button mat-button class="spacer" (click)="registerClick()">
+        <mat-icon>launch</mat-icon>
+        <span style="font-size: large;">Register</span>
+      </button>
+    </mat-toolbar>
+  </p>  
+
+<br/>
+<br/>
+
+
+<h1 >Login form</h1>
+<form>
+    <div>
+        <span>Username:</span><input type='text' name='username' [(ngModel)]='username' required="true">
+    </div>
+    <div>
+        <span>Password:</span><input type='password' name='password' [(ngModel)]='password' >
+    </div>
+        <div>
+            <button (click)='signIn()' class="button-login">Sign In</button>
+        </div>
+        <div>
+            <button (click)='register()' class="button-login">Register</button>
+        </div>
+        <div class="red">
+            {{poruka}}
+        </div>
+</form>
+

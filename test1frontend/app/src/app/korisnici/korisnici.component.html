@@ -1,0 +1,177 @@
+<p>
+    <mat-toolbar color="primary">
+      <button mat-icon-button class="example-icon" (click)="home()">
+        <mat-icon>home</mat-icon>
+      </button>
+      <span style="font-size: xx-large; font: weight 700px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">KPN</span>
+      <span class="example-spacer"></span>
+
+      <button mat-button  (click)="ponude()">
+        <mat-icon>euro_symbol</mat-icon>
+        <span style="font-size: large;">Ponude</span>
+      </button>
+
+      <button mat-button  (click)="sifra()">
+        <mat-icon>swap_horiz</mat-icon>
+        <span style="font-size: large;">Menjanje šifre</span>
+      </button>
+
+      <button mat-button  (click)="nekretnine()">
+        <mat-icon>theaters</mat-icon>
+        <span style="font-size: large;">Nekretnine</span>
+      </button>
+
+      <button mat-button  (click)="korisnici()">
+        <mat-icon>account_box</mat-icon>
+        <span style="font-size: large;">Korisnici</span>
+      </button>
+
+      <button mat-button  (click)="registracije()">
+        <mat-icon>check_circle_outline</mat-icon>
+        <span style="font-size: large;">Registracije</span>
+      </button>
+
+
+      <button mat-button class="spacer" (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span style="font-size: large;">LogOut</span>
+      </button>
+    </mat-toolbar>
+  </p>  
+
+  <br/>
+  <br/>
+
+  <h1>Dodaj korisnika</h1>
+<form [formGroup]="form" (submit)="onSubmit()">
+    <div>
+        <span>Username:</span> <input formControlName="username" type="text" required>
+        <div *ngIf="username.invalid" class="red2">
+            Username required!
+        </div>
+    </div>
+    
+    <div>
+        <span>Password:</span> <input formControlName="password" type="password"  required>
+        <div *ngIf="password.invalid" class="red2">
+            Password required! At least: 1 lowercase,1 uppercase,1 special character, 8-24 length, no more than 3 symbols in row
+        </div>
+    </div>
+    <br>
+    <div>
+        <span>Confirm password: </span><input formControlName="confirm" type="password" required>
+        <div *ngIf="confirm.invalid" class="red2">
+            Password not matching!
+        </div>
+    </div>
+    <div>
+        <span>Firstname:</span> <input formControlName="firstname" type="text" required>
+        <div *ngIf="firstname.invalid" class="red2">
+            Firstname required!
+        </div>
+    </div>
+    <div>
+        <span>Lastname:</span> <input formControlName="lastname" type="text" required>
+        <div *ngIf="lastname.invalid" class="red2">
+            Lastname required!
+        </div>
+    </div>
+    <div>
+        <span>Country:</span> <select formControlName="country" >
+            <option *ngFor='let k of country_list'>{{k}}</option>
+        </select>
+        <div *ngIf="country.invalid" class="red2">
+            Country required!
+        </div>
+    </div>
+    <div>
+        <span>City:</span> <input formControlName="city" type="text">
+        <div *ngIf="city.invalid" class="red2">
+            City required!
+        </div>
+    </div>
+    <div>
+        <span>Mail:</span> <input formControlName="mail" type="text">
+        <div *ngIf="mail.invalid" class="red2">
+            Mail required!
+        </div>
+    </div>
+
+    <br>
+
+    <div>
+        <span>Choose profile picture(optional):</span> <input (change)="onFileSelect($event)" type="file" >
+    </div>
+    <div *ngIf="imageData">
+        <img [src]="imageData" height="100px" width="100px">
+    </div>
+    <br>
+    <div>
+        <button type="submit" class="button-register" [disabled]="!form.valid">Register</button>
+    </div>
+    
+
+    <div *ngIf='poruka' class='red'>
+        {{poruka}}
+    </div>
+</form> 
+
+<br/>
+<br/>
+
+<h1>Profili</h1>
+
+<table mat-table [dataSource]="kor" class="mat-elevation-z8">
+  <ng-container matColumnDef="imagePath">
+    <th mat-header-cell *matHeaderCellDef>Slika</th>
+    <td mat-cell *matCellDef="let element"><img  src="../../assets/{{element.imagepath}}"
+        width="100px" height="100px">
+    </td>
+
+  </ng-container>
+  <ng-container matColumnDef="username">
+    <th mat-header-cell *matHeaderCellDef>Username</th>
+    <td mat-cell *matCellDef="let element">{{element.username}}
+    </td>
+
+
+  </ng-container>
+  <ng-container matColumnDef="mail">
+    <th mat-header-cell *matHeaderCellDef>Email</th>
+    <td mat-cell *matCellDef="let element">{{element.mail}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="firstname">
+    <th mat-header-cell *matHeaderCellDef>First name</th>
+    <td mat-cell *matCellDef="let element">{{element.firstname}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastname">
+    <th mat-header-cell *matHeaderCellDef>Last name</th>
+    <td mat-cell *matCellDef="let element">{{element.lastname}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="country">
+    <th mat-header-cell *matHeaderCellDef>Country</th>
+    <td mat-cell *matCellDef="let element">{{element.country}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="city">
+    <th mat-header-cell *matHeaderCellDef>City</th>
+    <td mat-cell *matCellDef="let element">{{element.city}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="izmeni">
+    <th mat-header-cell *matHeaderCellDef>Izmeni</th>
+    <td mat-cell *matCellDef="let element"><button mat-raised-button color="primary" (click)="izmeni(element.username)">Izmeni</button></td>
+  </ng-container>
+
+  <ng-container matColumnDef="obrisi">
+    <th mat-header-cell *matHeaderCellDef>Obrisi</th>
+    <td mat-cell *matCellDef="let element"><button mat-raised-button color="primary" (click)="obrisi(element.username)">Obrisi</button></td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

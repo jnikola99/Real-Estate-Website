@@ -1,0 +1,204 @@
+<p>
+    <mat-toolbar color="primary">
+      <button mat-icon-button class="example-icon" (click)="home()">
+        <mat-icon>home</mat-icon>
+      </button>
+      <span style="font-size: xx-large; font: weight 700px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">KPN</span>
+      <span class="example-spacer"></span>
+
+      <button mat-button  (click)="ponude()">
+        <mat-icon>euro_symbol</mat-icon>
+        <span style="font-size: large;">Ponude</span>
+      </button>
+
+      <button mat-button  (click)="sifra()">
+        <mat-icon>swap_horiz</mat-icon>
+        <span style="font-size: large;">Menjanje šifre</span>
+      </button>
+
+      <button mat-button  (click)="nekretnineI()">
+        <mat-icon>theaters</mat-icon>
+        <span style="font-size: large;">Nekretnine</span>
+      </button>
+
+      <button mat-button  (click)="korisnici()">
+        <mat-icon>account_box</mat-icon>
+        <span style="font-size: large;">Korisnici</span>
+      </button>
+
+      <button mat-button  (click)="registracije()">
+        <mat-icon>check_circle_outline</mat-icon>
+        <span style="font-size: large;">Registracije</span>
+      </button>
+
+
+      <button mat-button class="spacer" (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span style="font-size: large;">LogOut</span>
+      </button>
+    </mat-toolbar>
+  </p>  
+
+  <br/>
+  <br/>
+
+  <h1>Dodavanje nekretnine</h1>
+
+  <form [formGroup]="form" (submit)="onSubmit()">
+
+    <div>
+        <span>Naziv:</span> <input formControlName="naziv" type="text" required>
+        <div *ngIf="naziv.invalid" class="red2">
+            Naziv obavezan!
+        </div>
+    </div>
+
+    <div>
+        <span>Grad i opstina:</span> <input formControlName="gradopstina" type="text" required>
+        <div *ngIf="gradopstina.invalid" class="red2">
+            Grad i opstina su obavezni!
+        </div>
+    </div>
+
+    <div>
+        <span>Adresa:</span> <input formControlName="adresa" type="text" required>
+        <div *ngIf="adresa.invalid" class="red2">
+            Adresa je obavezna!
+        </div>
+    </div>
+
+    <div>
+        <span>Kuca/Stan: </span>
+        <input type="radio" name="tip" value="Kuca" formControlName="tip" checked>
+        <input type="radio" name="tip" value="Stan" formControlName="tip">
+        
+    </div>
+
+    <div>
+        <span>Broj spratova: </span> <input formControlName="brojspratova" type="text" required>
+        <div *ngIf="brojspratova.invalid" class="red2">
+            Broj spratova je obavezan!
+        </div>
+    </div>
+
+    <div>
+        <span>Sprat: </span> <input formControlName="sprat" type="text" >
+    </div>
+
+    <div>
+        <span>Kvadratura: </span> <input formControlName="kvadratura" type="text" required>
+        <div *ngIf="kvadratura.invalid" class="red2">
+            Kvadratura je obavezna!
+        </div>
+    </div>
+
+    <div>
+        <span>Izdaje/Prodaje se: </span>
+        <input type="radio" name="izdaje" value="Izdaje se" formControlName="izdaje" checked>
+        <input type="radio" name="izdaje" value="Prodaje se" formControlName="izdaje">
+        
+    </div>
+    <span>Sobe: </span> <input formControlName="sobe" type="text" required>
+    <div *ngIf="sobe.invalid" class="red2">
+        Sobe su obavezne!
+    </div>
+    <div>
+        
+    </div>
+   
+    <div>
+        <span>Cena: </span> <input formControlName="cena" type="text" required>
+        <div *ngIf="cena.invalid" class="red2">
+            Kvadratura je obavezna!
+        </div>
+    </div>
+    <div>
+        <input formControlName="namestena" type="checkbox" name="namestena" value="namestena" >Namestena
+    </div>
+    <div>
+        <span>Izaberite bar 3 slike: </span> <input (change)="onFileSelect($event)" type="file" multiple>
+    </div>
+    <div>
+        <button type="submit" class="button-register" [disabled]=!form.valid>Dodaj</button>
+    </div>
+    
+  </form>
+
+  <br/>
+  <br/>
+
+  <h1>Odobri nekretnine</h1>
+  
+<table mat-table [dataSource]="nekretnine" class="mat-elevation-z8">
+    <ng-container matColumnDef="slika">
+        <th mat-header-cell *matHeaderCellDef>
+            Slika
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <img width="150px" height="150px" src="../../assets/{{element.galerija[0].path}}">
+        </td>
+    </ng-container>
+    
+      <ng-container matColumnDef="naziv">
+        <th mat-header-cell *matHeaderCellDef>Naziv</th>
+        <td mat-cell *matCellDef="let element">{{element.naziv}}
+          
+        </td>
+      </ng-container>
+        <ng-container matColumnDef="adresa">
+          <th mat-header-cell *matHeaderCellDef>Adresa</th>
+          <td mat-cell *matCellDef="let element">{{element.adresa}}
+          </td>
+        </ng-container>
+          <ng-container matColumnDef="tip">
+            <th mat-header-cell *matHeaderCellDef>Tip</th>
+            <td mat-cell *matCellDef="let element">{{element.tip}}
+            </td>
+          </ng-container>
+            <ng-container matColumnDef="brojspratova">
+              <th mat-header-cell *matHeaderCellDef>Broj spratova</th>
+              <td mat-cell *matCellDef="let element">{{element.brojspratova}}
+              </td>
+            </ng-container>
+              <ng-container matColumnDef="sprat">
+                <th mat-header-cell *matHeaderCellDef>Sprat</th>
+                <td mat-cell *matCellDef="let element">{{element.sprat}}
+                </td>
+              </ng-container>
+                <ng-container matColumnDef="kvadratura">
+                  <th mat-header-cell *matHeaderCellDef>Kvadratura</th>
+                  <td mat-cell *matCellDef="let element">{{element.kvadratura}}
+                  </td>
+                </ng-container>
+                  <ng-container matColumnDef="sobe">
+                    <th mat-header-cell *matHeaderCellDef>Sobe</th>
+                    <td mat-cell *matCellDef="let element">{{element.sobe}}
+                    </td>
+                  </ng-container>
+                    <ng-container matColumnDef="izdaje">
+                      <th mat-header-cell *matHeaderCellDef>Izdaje/Prodaje</th>
+                      <td mat-cell *matCellDef="let element">{{element.izdaje}}
+                      </td>
+                    </ng-container>
+                      <ng-container matColumnDef="cena">
+                        <th mat-header-cell *matHeaderCellDef>Cena</th>
+                        <td mat-cell *matCellDef="let element">{{element.cena}}$
+                        </td>
+                      </ng-container>
+                        <ng-container matColumnDef="gradopstina">
+                          <th mat-header-cell *matHeaderCellDef>Grad i opstina</th>
+                          <td mat-cell *matCellDef="let element">{{element.gradopstina}}
+                          </td>
+                        </ng-container>
+                        <ng-container matColumnDef="dugme">
+                          <th mat-header-cell *matHeaderCellDef>Odobri</th>
+                          <td mat-cell *matCellDef="let element"><button mat-raised-button color="primary" (click)="odobri(element.id)">Odobri</button></td>
+                        </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<br/>
+<br/>
+

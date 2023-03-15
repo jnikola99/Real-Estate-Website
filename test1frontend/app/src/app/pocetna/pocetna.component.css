@@ -1,0 +1,60 @@
+.pretraga{
+    display:flex;
+    justify-content: center;
+
+}
+
+.forma{
+  margin:0 auto;
+  border-radius: 25px;
+  border: 2px solid indigo;
+  padding: 20px;
+  width: 200px;
+  height: fit-content;
+  justify-content: center;
+}
+
+mat-card::ng-deep.mat-card-header-text {
+  width: 100%;
+}
+
+.btn-center{
+  margin: 0 auto;
+  display: flex;
+  
+}
+
+.cards{
+  outline-width: 2px;
+  outline-color: indigo;
+  height:400px;
+  outline-style:outset;
+  margin:15px;
+  background-color:aliceblue;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-style: oblique;
+}
+
+.naslov-card{
+  color:darkblue;
+  text-shadow: 1px;
+  font:400;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.spacer{
+  padding: 15px;
+}
+
+h4{
+  color:#3700b3;
+    font-family: 'Helvetica Neue', sans-serif; 
+    font-size: 50px; 
+    font-weight: bold; 
+    letter-spacing: -1px; 
+    line-height: 1; 
+    text-align: center;
+}

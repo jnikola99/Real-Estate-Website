@@ -1,0 +1,124 @@
+<p>
+    <mat-toolbar color="primary">
+      <button mat-icon-button class="example-icon" (click)="home()">
+        <mat-icon>home</mat-icon>
+      </button>
+      <span style="font-size: xx-large; font: weight 700px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">KPN</span>
+      <span class="example-spacer"></span>
+
+      <button mat-button  (click)="sifra()">
+        <mat-icon>swap_horiz</mat-icon>
+        <span style="font-size: large;">Promeni šifru</span>
+      </button>
+
+      <button mat-button  (click)="dodavanje()">
+        <mat-icon>theaters</mat-icon>
+        <span style="font-size: large;">Dodaj nekretninu</span>
+      </button>
+
+      <button mat-button  (click)="promovisanje()">
+        <mat-icon>pan_tool</mat-icon>
+        <span style="font-size: large;">Promovisi</span>
+      </button>
+
+      <button mat-button  (click)="odobravanje()">
+        <mat-icon>check_circle_outline</mat-icon>
+        <span style="font-size: large;">Odobri</span>
+      </button>
+
+      <button mat-button  (click)="ponude()">
+        <mat-icon>euro_symbol</mat-icon>
+        <span style="font-size: large;">Ponude</span>
+      </button>
+
+      <button mat-button class="spacer" (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span style="font-size: large;">LogOut</span>
+      </button>
+    </mat-toolbar>
+  </p>  
+
+  <br/>
+  <br/>
+
+  <h1>Dodavanje nekretnine</h1>
+
+  <form [formGroup]="form" (submit)="onSubmit()">
+
+    <div>
+        <span>Naziv:</span> <input formControlName="naziv" type="text" required>
+        <div *ngIf="naziv.invalid" class="red2">
+            Naziv obavezan!
+        </div>
+    </div>
+
+    <div>
+        <span>Grad i opstina:</span> <input formControlName="gradopstina" type="text" required>
+        <div *ngIf="gradopstina.invalid" class="red2">
+            Grad i opstina su obavezni!
+        </div>
+    </div>
+
+    <div>
+        <span>Adresa:</span> <input formControlName="adresa" type="text" required>
+        <div *ngIf="adresa.invalid" class="red2">
+            Adresa je obavezna!
+        </div>
+    </div>
+
+    <div>
+        <span>Kuca/Stan: </span>
+        <input type="radio" name="tip" value="Kuca" formControlName="tip" checked>
+        <input type="radio" name="tip" value="Stan" formControlName="tip">
+        
+    </div>
+
+    <div>
+        <span>Broj spratova: </span> <input formControlName="brojspratova" type="text" required>
+        <div *ngIf="brojspratova.invalid" class="red2">
+            Broj spratova je obavezan!
+        </div>
+    </div>
+
+    <div>
+        <span>Sprat: </span> <input formControlName="sprat" type="text" >
+    </div>
+
+    <div>
+        <span>Kvadratura: </span> <input formControlName="kvadratura" type="text" required>
+        <div *ngIf="kvadratura.invalid" class="red2">
+            Kvadratura je obavezna!
+        </div>
+    </div>
+
+    <div>
+        <span>Izdaje/Prodaje se: </span>
+        <input type="radio" name="izdaje" value="Izdaje se" formControlName="izdaje" checked>
+        <input type="radio" name="izdaje" value="Prodaje se" formControlName="izdaje">
+        
+    </div>
+    <span>Sobe: </span> <input formControlName="sobe" type="text" required>
+    <div *ngIf="sobe.invalid" class="red2">
+        Sobe su obavezne!
+    </div>
+    <div>
+        
+    </div>
+   
+    <div>
+        <span>Cena: </span> <input formControlName="cena" type="text" required>
+        <div *ngIf="cena.invalid" class="red2">
+            Kvadratura je obavezna!
+        </div>
+    </div>
+    <div>
+        <input formControlName="namestena" type="checkbox" name="namestena" value="namestena" >Namestena
+    </div>
+    <div>
+        <span>Izaberite bar 3 slike: </span> <input (change)="onFileSelect($event)" type="file" multiple>
+    </div>
+    <div>
+        <button type="submit" class="button-register" [disabled]=!form.valid>Dodaj</button>
+    </div>
+    
+  </form>
